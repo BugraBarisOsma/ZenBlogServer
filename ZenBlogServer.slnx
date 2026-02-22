@@ -1,0 +1,13 @@
+<Solution>
+  <Folder Name="/Core/">
+    <Project Path="Core/ZenBlog.Application/ZenBlog.Application.csproj" Id="166e8c95-de3c-4f29-a619-825bf17e854b" />
+    <Project Path="Core/ZenBlog.Domain/ZenBlog.Domain.csproj" Id="2fb40f87-b3da-4cf9-8a5a-97405caab88f" />
+  </Folder>
+  <Folder Name="/Infrastructure/">
+    <Project Path="Infrastructure/ZenBlog.Infrastructure/ZenBlog.Infrastructure.csproj" Id="dfb01bc2-5f7b-4335-9a45-50e794b32d3b" />
+    <Project Path="Infrastructure/ZenBlog.Persistence/ZenBlog.Persistence.csproj" Id="7e06dd1c-cec1-4acf-a240-fb77615f1859" />
+  </Folder>
+  <Folder Name="/Presentation/">
+    <Project Path="Presentation/ZenBlog.API/ZenBlog.API.csproj" Id="9f1b76bf-bc6a-4982-a9ab-2164ede09745" />
+  </Folder>
+</Solution>
