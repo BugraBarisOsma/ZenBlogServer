@@ -34,11 +34,27 @@ namespace ZenBlog.API.Endpoints
                     ? Results.Ok(response)
                     : Results.BadRequest(response);
             });
+            blogs.MapGet("byCategoryId/{categoryId}", async (Guid categoryId, IMediator mediator) =>
+            {
+                var response = await mediator.Send(new GetBlogsByCategoryIdQuery(categoryId));
+
+                return response.IsSuccess
+                    ? Results.Ok(response)
+                    : Results.BadRequest(response);
+
+            });
             blogs.MapPatch(string.Empty, async (UpdateBlogCommand command, IMediator mediator) =>
             {
 
                 var response = await mediator.Send(command);
 
+                return response.IsSuccess
+                    ? Results.Ok(response)
+                    : Results.BadRequest(response);
+            });
+            blogs.MapDelete("/{id}", async (Guid id, IMediator mediator) =>
+            {
+                var response = await mediator.Send(new DeleteBlogCommand { Id = id });
                 return response.IsSuccess
                     ? Results.Ok(response)
                     : Results.BadRequest(response);

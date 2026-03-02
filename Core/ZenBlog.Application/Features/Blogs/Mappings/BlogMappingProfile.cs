@@ -15,6 +15,7 @@ namespace ZenBlog.Application.Features.Blogs.Mappings
         { 
             CreateMap<Blog,GetBlogsQueryResult>().ReverseMap();  
             CreateMap<Blog,GetBlogByIdQueryResult>().ReverseMap();
+            CreateMap<Blog,GetBlogsByCategoryIdQueryResult>().ReverseMap();
 
             CreateMap<Blog, CreateBlogCommand>().ReverseMap();
             CreateMap<Blog, UpdateBlogCommand>().ReverseMap();
