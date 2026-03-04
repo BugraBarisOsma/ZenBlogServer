@@ -17,6 +17,10 @@ namespace ZenBlog.Application.Features.Comments.Mappings
             CreateMap<Comment, GetCommentByIdQueryResult>().ReverseMap();
 
             CreateMap<Comment, CreateCommentCommand>().ReverseMap();
+            CreateMap<Comment, UpdateCommentCommand>().ReverseMap();
+            CreateMap<Comment, DeleteCommentCommand>().ReverseMap();
+
+            CreateMap<UpdateCommentCommand, Comment>().ForAllMembers(opt => opt.Condition((src, dest, srcMember) => srcMember != null));
         }
     }
 }

@@ -21,6 +21,14 @@ namespace ZenBlog.API.Endpoints
                     : Results.BadRequest(response);
 
             });
+            comments.MapGet("/{id}", async (Guid id, IMediator mediator) =>
+            {
+                var response = await mediator.Send(new GetCommentByIdQuery(id));
+
+                return response.IsSuccess
+                    ? Results.Ok(response)
+                    : Results.BadRequest(response);
+            });
             comments.MapPost(string.Empty, async (CreateCommentCommand comment,IMediator mediator) =>
             { 
                 var response = await mediator.Send(comment);
@@ -30,14 +38,24 @@ namespace ZenBlog.API.Endpoints
                     : Results.BadRequest(response);
 
             });
-            comments.MapGet("/{id}", async (Guid id, IMediator mediator) =>
+            comments.MapPatch("/{id}",async (IMediator mediator,UpdateCommentCommand command) => 
             {
-                var response = await mediator.Send(new GetCommentByIdQuery(id));
+              var response = await mediator.Send(command);
 
+                return response.IsSuccess
+                    ? Results.Ok(response)
+                    : Results.BadRequest(response); 
+
+            });
+            comments.MapDelete("/{id}", async (Guid id, IMediator mediator) =>
+            {
+                var response = await mediator.Send(new DeleteCommentCommand { Id = id });
                 return response.IsSuccess
                     ? Results.Ok(response)
                     : Results.BadRequest(response);
             });
+
+
         }
     }
 }

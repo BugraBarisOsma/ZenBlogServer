@@ -1,0 +1,29 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Text;
+using AutoMapper;
+using MediatR;
+using ZenBlog.Application.Base;
+using ZenBlog.Application.Contracts.Persistence;
+using ZenBlog.Application.Features.SubComments.Commands;
+using ZenBlog.Domain.Entities;
+
+namespace ZenBlog.Application.Features.SubComments.Handlers
+{
+    public class UpdateSubCommentCommandHandler(IRepository<SubComment> repository , IMapper mapper , IUnitOfWork unitOfWork) : IRequestHandler<UpdateSubCommentCommand, BaseResult<object>>
+    {
+        public async Task<BaseResult<object>> Handle(UpdateSubCommentCommand request, CancellationToken cancellationToken)
+        {
+            var subComment = await repository.GetByIdAsync(request.Id);
+            if (subComment == null)
+            {
+                return BaseResult<object>.NotFound("SubComment not found.");
+            }
+            mapper.Map(request, subComment);
+            repository.UpdateAsync(subComment);
+            var result = await unitOfWork.SaveChangesAsync();
+            return BaseResult<object>.Success("SubComment updated successfully");
+
+        }
+    }
+}

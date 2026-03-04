@@ -9,6 +9,8 @@
             app.RegisterBlogEndpoints();
             app.RegisterUserEndpoints();
             app.RegisterCommentEndpoints();
+            app.RegisterUserEndpoints();
+            app.RegisterSubCommentEndpoints();
 
         }
     }
