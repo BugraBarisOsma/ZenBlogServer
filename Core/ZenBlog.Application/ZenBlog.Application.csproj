@@ -18,6 +18,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="Features\Socials\Validators\" />
     <Folder Include="Features\Users\Queries\" />
   </ItemGroup>
 

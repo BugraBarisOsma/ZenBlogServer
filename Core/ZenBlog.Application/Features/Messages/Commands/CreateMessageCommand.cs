@@ -1,16 +1,17 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
-using ZenBlog.Domain.Entities.Common;
+using MediatR;
+using ZenBlog.Application.Base;
 
-namespace ZenBlog.Domain.Entities
+namespace ZenBlog.Application.Features.Messages.Commands
 {
-    public class Message : BaseEntity
+    public class CreateMessageCommand : IRequest<BaseResult<object>>
     {
         public string Name { get; set; }
         public string Email { get; set; }
         public string Subject { get; set; }
         public string MessageBody { get; set; }
-        public bool IsRead { get; set; }
+        public bool IsRead { get; set; } = false;
     }
 }

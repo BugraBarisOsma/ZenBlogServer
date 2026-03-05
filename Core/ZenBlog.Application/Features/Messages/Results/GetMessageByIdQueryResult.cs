@@ -1,11 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
-using ZenBlog.Domain.Entities.Common;
+using ZenBlog.Application.Base;
 
-namespace ZenBlog.Domain.Entities
+namespace ZenBlog.Application.Features.Messages.Results
 {
-    public class Message : BaseEntity
+    public class GetMessageByIdQueryResult : BaseDTO
     {
         public string Name { get; set; }
         public string Email { get; set; }

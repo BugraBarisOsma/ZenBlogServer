@@ -11,6 +11,9 @@
             app.RegisterCommentEndpoints();
             app.RegisterUserEndpoints();
             app.RegisterSubCommentEndpoints();
+            app.RegisterContactInfoEndpoints();
+            app.RegisterMessageEndpoints();
+            app.RegisterSocialEndpoints();
 
         }
     }
