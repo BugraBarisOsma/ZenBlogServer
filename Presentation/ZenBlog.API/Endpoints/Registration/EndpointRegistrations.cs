@@ -9,7 +9,6 @@
             app.RegisterBlogEndpoints();
             app.RegisterUserEndpoints();
             app.RegisterCommentEndpoints();
-            app.RegisterUserEndpoints();
             app.RegisterSubCommentEndpoints();
             app.RegisterContactInfoEndpoints();
             app.RegisterMessageEndpoints();

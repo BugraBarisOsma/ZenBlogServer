@@ -18,6 +18,7 @@ namespace ZenBlog.API.Endpoints
                     ? Results.Ok(response)
                     : Results.BadRequest(response);
             });
+
             blogs.MapPost(string.Empty, async (CreateBlogCommand command, IMediator mediator) =>
             {
                 var response = await mediator.Send(command);

@@ -4,14 +4,16 @@ using System.Reflection;
 using System.Text;
 using FluentValidation;
 using MediatR;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using ZenBlog.Application.Behaviors;
+using ZenBlog.Application.Options;
 
 namespace ZenBlog.Application.Extensions
 {
     public static class ServiceRegistrations
     {
-        public static void AddApplicationServices(this IServiceCollection services)
+        public static void AddApplicationServices(this IServiceCollection services , IConfiguration configuration)
         {
 
             services.AddAutoMapper(cfg => { }, Assembly.GetExecutingAssembly());
@@ -22,6 +24,7 @@ namespace ZenBlog.Application.Extensions
             });
             services.AddValidatorsFromAssembly(Assembly.GetExecutingAssembly());
 
+            services.Configure<JwtTokenOptions>(configuration.GetSection(nameof(JwtTokenOptions)));
 
         }
     }
