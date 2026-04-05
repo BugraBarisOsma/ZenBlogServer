@@ -2,14 +2,14 @@
 using System.Collections.Generic;
 using System.Text;
 using ZenBlog.Application.Base;
-using ZenBlog.Domain.Entities;
+using ZenBlog.Application.Features.Blogs.Results;
 
 namespace ZenBlog.Application.Features.Categories.Results
 {
-    public class GetCategoryQueryResult : BaseDTO
+    public class GetCategoryBySlugQueryResult : BaseDTO
     {
         public string CategoryName { get; set; }
         public string Slug { get; set; }
-        //public IList<GetBlogQueryResult> Blogs { get; set; }
+        public IList<GetBlogsByCategoryIdQueryResult> Blogs { get; set; }
     }
 }

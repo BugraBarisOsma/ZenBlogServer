@@ -35,6 +35,14 @@ namespace ZenBlog.API.Endpoints
                     ? Results.Ok(response)
                     : Results.BadRequest(response);
             });
+            categories.MapGet("byCategorySlug/{slug}", async (string slug, IMediator mediator) =>
+            {
+                var response = await mediator.Send(new GetCategoryBySlugQuery { Slug = slug });
+
+                return response.IsSuccess
+                    ? Results.Ok(response)
+                    : Results.BadRequest(response);
+            });
 
             categories.MapPut(string.Empty, async (UpdateCategoryCommand request, IMediator mediator) =>
             {
