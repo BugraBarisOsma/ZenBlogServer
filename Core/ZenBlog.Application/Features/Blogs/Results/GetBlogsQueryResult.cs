@@ -13,6 +13,7 @@ namespace ZenBlog.Application.Features.Blogs.Results
         public string CoverImage { get; set; }
         public string BlogImage { get; set; }
         public string Description { get; set; }
+        public string Content { get; set; }
         public Guid CategoryId { get; set; }
         public GetCategoryQueryResult Category { get; set; }
         public Guid UserId { get; set; }

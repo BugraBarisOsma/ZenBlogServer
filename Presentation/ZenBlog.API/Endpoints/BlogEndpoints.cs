@@ -1,4 +1,5 @@
-﻿using MediatR;
+﻿using System.Security.Claims;
+using MediatR;
 using ZenBlog.Application.Features.Blogs.Commands;
 using ZenBlog.Application.Features.Blogs.Queries;
 
@@ -19,14 +20,14 @@ namespace ZenBlog.API.Endpoints
                     : Results.BadRequest(response);
             });
 
-            blogs.MapPost(string.Empty, async (CreateBlogCommand command, IMediator mediator) =>
+            blogs.MapPost(string.Empty, async (CreateBlogCommand command, IMediator mediator, ClaimsPrincipal user) =>
             {
+                command.UserId = Guid.Parse(user.FindFirst("sub")?.Value ?? user.FindFirst(ClaimTypes.NameIdentifier)?.Value);
                 var response = await mediator.Send(command);
-
                 return response.IsSuccess
                    ? Results.Ok(response)
                    : Results.BadRequest(response);
-            });
+            }).RequireAuthorization();
             blogs.MapGet("/{id}", async (Guid id, IMediator mediator) =>
             {
                 var response = await mediator.Send(new GetBlogByIdQuery(id));
@@ -46,9 +47,9 @@ namespace ZenBlog.API.Endpoints
             });
             blogs.MapPatch(string.Empty, async (UpdateBlogCommand command, IMediator mediator) =>
             {
-
+              
                 var response = await mediator.Send(command);
-
+                
                 return response.IsSuccess
                     ? Results.Ok(response)
                     : Results.BadRequest(response);
@@ -60,6 +61,15 @@ namespace ZenBlog.API.Endpoints
                     ? Results.Ok(response)
                     : Results.BadRequest(response);
             });
+            blogs.MapGet("/debug-auth", (ClaimsPrincipal user, HttpContext ctx) =>
+            {
+                return Results.Ok(new
+                {
+                    authHeader = ctx.Request.Headers["Authorization"].ToString(),
+                    isAuthenticated = user.Identity?.IsAuthenticated,
+                    claims = user.Claims.Select(c => new { c.Type, c.Value })
+                });
+            }).AllowAnonymous();
         }
     }
 }

@@ -15,6 +15,7 @@ namespace ZenBlog.Application.Features.Blogs.Handlers
         public async Task<BaseResult<object>> Handle(CreateBlogCommand request, CancellationToken cancellationToken)
         {
             var blog = mapper.Map<Blog>(request);  
+            
             await repository.AddAsync(blog);
             await unitOfWork.SaveChangesAsync();
             return BaseResult<object>.Success(blog.Id);
